@@ -1,8 +1,4 @@
-// TODO:
-//  Check if id is unique
 package vendorProfiles;
-
-import java.util.Random;
 
 /**
  * This class details the vendor profile's characteristics
@@ -20,17 +16,18 @@ public class Vendor {
     private String lastOrderDate;
     private String seasonalDiscountsStartDate;
 
-    public void main(String args[]){
-        // Randomizes the values of the id
-        Random rand = new Random();
-        StringBuilder temp = new StringBuilder("012345");
-        for (int i = 0; i < 6; i++){
-            // Randomizes and stores each digit of id
-            temp.setCharAt(i, (char) rand.nextInt(10));
-        }
-
-        // Sets id to random unique value
-        setId(temp.toString());
+    public Vendor(String id, String name, String address, String city, String state, String phoneNumber, double balance,
+                  double lastPaidAmount, String lastOrderDate, String seasonalDiscountsStartDate){
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
+        this.balance = balance;
+        this.lastPaidAmount = lastPaidAmount;
+        this.lastOrderDate = lastOrderDate;
+        this.seasonalDiscountsStartDate = seasonalDiscountsStartDate;
     }
 
     // Block of accessor functions
