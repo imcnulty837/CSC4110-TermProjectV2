@@ -4,14 +4,12 @@ import java.io.*;
 import java.util.Random;
 
 /**
- * This class is used to access the Vendor class
+ * This class is used to implement the VendorDAO interface
  * @author Ian McNulty
  */
-public class VendorDAO {
-    private FileReader reader;
-    private FileWriter writer;
+public class VendorDAOImp implements IVendorDAO {
 
-    public VendorDAO(){
+    public VendorDAOImp(){
     }
 
     /**
@@ -33,7 +31,7 @@ public class VendorDAO {
 
     public void insert(Vendor vendor) {
         try {
-            writer = new FileWriter("profiles.txt", true);
+            FileWriter writer = new FileWriter("profiles.txt", true);
             //BufferedWriter bufferedWriter = new BufferedWriter(writer);
             writer.write(vendor.getId() + "|");
             writer.write(vendor.getName() + "|");
@@ -55,7 +53,7 @@ public class VendorDAO {
     public boolean check(String name) {
         boolean existence = false;
         try {
-            reader = new FileReader("profiles.txt");
+            FileReader reader = new FileReader("profiles.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
             System.out.println(bufferedReader);
             String temp;
