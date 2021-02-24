@@ -7,28 +7,27 @@ import java.util.Random;
  * This class is used to implement the VendorDAO interface
  * @author Ian McNulty
  */
-public class VendorDAOImp implements IVendorDAO {
-
-    public VendorDAOImp(){
-    }
+public class VendorDAO implements IVendorDAO {
 
     /**
      * Randomizes the ID and returns the new ID
-     * @return temp, The randomized string of characters that is the ID
+     * @return temp, The randomized string of numerical characters that is the ID
      */
+    @Override
     public String initID() {
         // Randomizes the values of the id
         Random rand = new Random();
         StringBuilder temp = new StringBuilder("012345");
         for (int i = 0; i < 6; i++){
             // Randomizes and stores each digit of id
-            temp.setCharAt(i, (char) (rand.nextInt(26)+'a'));
+            temp.setCharAt(i, (char) (rand.nextInt(10)+'0'));
         }
 
         // Sets id to random unique value
         return temp.toString();
     }
 
+    @Override
     public void insert(Vendor vendor) {
         try {
             FileWriter writer = new FileWriter("profiles.txt", true);
@@ -50,6 +49,7 @@ public class VendorDAOImp implements IVendorDAO {
         }
     }
 
+    @Override
     public boolean check(String name) {
         boolean existence = false;
         try {

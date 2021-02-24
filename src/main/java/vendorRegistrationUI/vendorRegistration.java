@@ -1,7 +1,8 @@
 package vendorRegistrationUI;
 
+import vendorProfiles.IVendorDAO;
 import vendorProfiles.Vendor;
-import vendorProfiles.VendorDAOImp;
+import vendorProfiles.VendorDAO;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,7 @@ public class vendorRegistration {
     private JPanel menu;
     private JButton registerButton;
 
-    private VendorDAOImp vendorDAOImp = new VendorDAOImp();
+    private IVendorDAO vendorDAOImp = new VendorDAO();
 
     public vendorRegistration() {
         registerButton.addActionListener(new ActionListener() {
