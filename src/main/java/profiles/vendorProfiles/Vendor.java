@@ -1,10 +1,12 @@
-package vendorProfiles;
+package profiles.vendorProfiles;
+
+import profiles.Profile;
 
 /**
  * This class details the vendor profile's characteristics
  * @author Ian McNulty
  */
-public class Vendor {
+public class Vendor extends Profile {
     private String id;
     private String name;
     private String address;

@@ -1,8 +1,8 @@
-package vendorRegistrationUI;
+package profiles.vendorRegistrationUI;
 
-import vendorProfiles.IVendorDAO;
-import vendorProfiles.Vendor;
-import vendorProfiles.VendorDAO;
+import profiles.IProfileDAO;
+import profiles.vendorProfiles.Vendor;
+import profiles.vendorProfiles.VendorDAO;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,13 +24,13 @@ public class vendorRegistration {
     private JPanel menu;
     private JButton registerButton;
 
-    private IVendorDAO vendorDAOImp = new VendorDAO();
+    private IProfileDAO vendorDAO = new VendorDAO();
 
     public vendorRegistration() {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = vendorDAOImp.initID();
+                String id = vendorDAO.initID();
                 String name = companyName.getText();
                 String address = streetAddress.getText();
                 String city = cityName.getText();
@@ -43,9 +43,9 @@ public class vendorRegistration {
 
                 Vendor vendor = new Vendor(id, name, address, city, state, phone, balance,
                         lastPaidAmount, lastOrderDate, seasonalDiscountsStartDate);
-                if (!vendorDAOImp.check(name)) {
+                if (!vendorDAO.check(name)) {
                     JOptionPane.showMessageDialog(menu, "Registration Successful");
-                    vendorDAOImp.insert(vendor);
+                    vendorDAO.insertVendor(vendor);
                 } else {
                     JOptionPane.showMessageDialog(menu, "Registration Unsuccessful! Username Exists");
                     companyName.setText("");

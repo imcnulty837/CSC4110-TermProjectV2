@@ -1,4 +1,8 @@
-package vendorProfiles;
+package profiles.vendorProfiles;
+
+import profiles.IProfileDAO;
+import profiles.customerProfiles.Customer;
+import profiles.itemProfiles.Item;
 
 import java.io.*;
 import java.util.Random;
@@ -7,7 +11,7 @@ import java.util.Random;
  * This class is used to implement the VendorDAO interface
  * @author Ian McNulty
  */
-public class VendorDAO implements IVendorDAO {
+public class VendorDAO implements IProfileDAO {
 
     /**
      * Randomizes the ID and returns the new ID
@@ -28,7 +32,7 @@ public class VendorDAO implements IVendorDAO {
     }
 
     @Override
-    public void insert(Vendor vendor) {
+    public void insertVendor(Vendor vendor) {
         try {
             FileWriter writer = new FileWriter("profiles.txt", true);
             //BufferedWriter bufferedWriter = new BufferedWriter(writer);
@@ -47,6 +51,16 @@ public class VendorDAO implements IVendorDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void insertCustomer(Customer customer) {
+        System.out.println("Cannot access Customer data type");
+    }
+
+    @Override
+    public void insertItem(Item item) {
+        System.out.println("Cannot access Item data type");
     }
 
     @Override
