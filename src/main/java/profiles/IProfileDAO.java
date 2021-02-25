@@ -10,7 +10,6 @@ import profiles.customerProfiles.Customer;
 public interface IProfileDAO {
     String initID();
     boolean check(String name);
-
     void insertVendor(Vendor vendor);
     void insertCustomer(Customer customer);
     void insertItem(Item item);

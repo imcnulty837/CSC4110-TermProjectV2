@@ -7,8 +7,6 @@ import profiles.Profile;
  * @author Ian McNulty
  */
 public class Vendor extends Profile {
-    private String id;
-    private String name;
     private String address;
     private String city;
     private String state;
@@ -20,8 +18,8 @@ public class Vendor extends Profile {
 
     public Vendor(String id, String name, String address, String city, String state, String phoneNumber, double balance,
                   double lastPaidAmount, String lastOrderDate, String seasonalDiscountsStartDate){
-        this.id = id;
-        this.name = name;
+        super.setName(name);
+        super.setId(id);
         this.address = address;
         this.city = city;
         this.state = state;
@@ -33,8 +31,6 @@ public class Vendor extends Profile {
     }
 
     // Block of accessor functions
-    public String getId(){ return id; }
-    public String getName(){ return name; }
     public String getAddress(){ return address; }
     public String getCity(){ return city; }
     public String getState(){ return state; }
@@ -46,8 +42,6 @@ public class Vendor extends Profile {
 
     // Block of transformer functions
     public void setAddress(String address) { this.address = address; }
-    public void setId(String id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
     public void setBalance(double balance) { this.balance = balance; }
     public void setCity(String city) { this.city = city; }
     public void setLastOrderDate(String lastOrderDate) { this.lastOrderDate = lastOrderDate; }

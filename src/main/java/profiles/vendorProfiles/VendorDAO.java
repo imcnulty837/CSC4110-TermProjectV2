@@ -8,13 +8,16 @@ import java.io.*;
 import java.util.Random;
 
 /**
- * This class is used to implement the VendorDAO interface
+ * This class is used to implement the IProfileDAO interface
+ *
+ * @see IProfileDAO
  * @author Ian McNulty
  */
 public class VendorDAO implements IProfileDAO {
 
     /**
      * Randomizes the ID and returns the new ID
+     *
      * @return temp, The randomized string of numerical characters that is the ID
      */
     @Override
@@ -31,10 +34,42 @@ public class VendorDAO implements IProfileDAO {
         return temp.toString();
     }
 
+    /**
+     * This function searches the data for a username and returns a true boolean if it is found
+     *
+     * @param name, the name to be checked for in the dataset
+     * @return existence, a true or false stating whether or not the username already exists in the data
+     */
+    @Override
+    public boolean check(String name) {
+        boolean existence = false;
+        try {
+            FileReader reader = new FileReader("VProfiles.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            System.out.println(bufferedReader);
+            String temp;
+            while ((temp = bufferedReader.readLine()) != null) {
+                System.out.println(bufferedReader);
+                if (temp.contains(name)) {
+                    existence = true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return existence;
+    }
+
+    /**
+     * Inserts a new Vendor object into the place of storage
+     *
+     * @param vendor, A Vendor object holding all the needed data
+     */
     @Override
     public void insertVendor(Vendor vendor) {
         try {
-            FileWriter writer = new FileWriter("profiles.txt", true);
+            FileWriter writer = new FileWriter("VProfiles.txt", true);
             //BufferedWriter bufferedWriter = new BufferedWriter(writer);
             writer.write(vendor.getId() + "|");
             writer.write(vendor.getName() + "|");
@@ -55,32 +90,12 @@ public class VendorDAO implements IProfileDAO {
 
     @Override
     public void insertCustomer(Customer customer) {
-        System.out.println("Cannot access Customer data type");
+        System.out.println("Cannot access this datatype with VendorDAO");
     }
 
     @Override
     public void insertItem(Item item) {
-        System.out.println("Cannot access Item data type");
+        System.out.println("Cannot access this datatype with VendorDAO");
     }
 
-    @Override
-    public boolean check(String name) {
-        boolean existence = false;
-        try {
-            FileReader reader = new FileReader("profiles.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            System.out.println(bufferedReader);
-            String temp;
-            while ((temp = bufferedReader.readLine()) != null) {
-                System.out.println(bufferedReader);
-                if (temp.contains(name)) {
-                    existence = true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return existence;
-    }
 }
