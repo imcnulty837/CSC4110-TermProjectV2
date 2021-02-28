@@ -43,19 +43,24 @@ public class vendorRegistration {
 
                 Vendor vendor = new Vendor(id, name, address, city, state, phone, balance,
                         lastPaidAmount, lastOrderDate, seasonalDiscountsStartDate);
-                if (!vendorDAO.check(name)) {
-                    JOptionPane.showMessageDialog(menu, "Registration Successful");
-                    vendorDAO.insertVendor(vendor);
+                if (!name.isEmpty() && !address.isEmpty() && !city.isEmpty() && !state.isEmpty()
+                        && !phone.isEmpty() && !lastOrderDate.isEmpty() && !seasonalDiscountsStartDate.isEmpty()) {
+                    if (!vendorDAO.check(name)) {
+                        JOptionPane.showMessageDialog(menu, "Registration Successful");
+                        vendorDAO.insertVendor(vendor);
+                    } else {
+                        JOptionPane.showMessageDialog(menu, "Registration Unsuccessful! Username Exists");
+                        companyName.setText("");
+                        streetAddress.setText("");
+                        cityName.setText("");
+                        phoneNumber.setText("");
+                        bal.setText("");
+                        lastPaid.setText("");
+                        lastOrder.setText("");
+                        seasonalDiscount.setText("");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(menu, "Registration Unsuccessful! Username Exists");
-                    companyName.setText("");
-                    streetAddress.setText("");
-                    cityName.setText("");
-                    phoneNumber.setText("");
-                    bal.setText("");
-                    lastPaid.setText("");
-                    lastOrder.setText("");
-                    seasonalDiscount.setText("");
+                    JOptionPane.showMessageDialog(menu, "Please fill out remaining fields");
                 }
             }
         });

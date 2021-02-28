@@ -44,7 +44,7 @@ public class VendorDAO implements IProfileDAO {
     public boolean check(String name) {
         boolean existence = false;
         try {
-            FileReader reader = new FileReader("VProfiles.txt");
+            FileReader reader = new FileReader("VProfiles");
             BufferedReader bufferedReader = new BufferedReader(reader);
             System.out.println(bufferedReader);
             String temp;
@@ -69,7 +69,7 @@ public class VendorDAO implements IProfileDAO {
     @Override
     public void insertVendor(Vendor vendor) {
         try {
-            FileWriter writer = new FileWriter("VProfiles.txt", true);
+            FileWriter writer = new FileWriter("VProfiles", true);
             //BufferedWriter bufferedWriter = new BufferedWriter(writer);
             writer.write(vendor.getId() + "|");
             writer.write(vendor.getName() + "|");
