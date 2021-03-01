@@ -22,7 +22,7 @@ public class CustomerDAO implements IProfileDAO {
      * @return temp, The randomized string of numerical characters that is the ID
      */
     @Override
-    public static String initID() {
+    public String initID() {
         // Randomizes the values of the id
         Random rand = new Random();
         StringBuilder temp = new StringBuilder("012345");

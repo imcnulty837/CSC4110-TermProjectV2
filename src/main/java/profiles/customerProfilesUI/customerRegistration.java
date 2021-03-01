@@ -30,15 +30,31 @@ public class customerRegistration {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                /**
+                 * A few different errors here, you are constantly trying to reinitiate variables as different types
+                 * Such as with String customerID, String state, and String phoneNumber
+                 * It would be better to use different values for the boxes
+                 *
+                 **/
+                // You cannot use a class without first creating an instance of it
                 String customerID = CustomerDAO.initID();
+
+                // You cannot call the customerID variable as a JTextField because you reinitiated it to String
                 String fullName = customerID.getText();
+
+                // These are fine
                 String address = StreetAddress.getText();
                 String city = cityName.getText();
+
+                // You are reinitating both state and phoneNumber to be String datatypes, you need to use different names
                 String state = state.getSelectedItem().toString();
                 String phoneNumber = phoneNumber.getText();
+
+                // You are also reinitiating balance, lastPaid, and lastOrder
                 double balance = Double.parseDouble(balance.getText());
                 double lastPaid = Double.parseDouble(lastPaid.getText());
                 String lastOrder = lastOrder.getText();
+
 
             }
 
