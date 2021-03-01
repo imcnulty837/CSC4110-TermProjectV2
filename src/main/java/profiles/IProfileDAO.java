@@ -4,6 +4,8 @@ import profiles.itemProfiles.Item;
 import profiles.vendorProfiles.Vendor;
 import profiles.customerProfiles.Customer;
 
+import java.io.FileNotFoundException;
+
 /**
  * This interface is used to access the data stored in Vendor objects
  */
