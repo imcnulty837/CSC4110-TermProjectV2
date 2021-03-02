@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class customerRegistration {
-    private JPanel panel1;
     private JTextField customerRegistrationTextField;
     private JTextField customerID;
     private JTextField fullName;
@@ -22,20 +21,18 @@ public class customerRegistration {
     private JPanel menu;
     private JButton registerButton;
 
-    public customerRegistration()
-    {
-        registerButton.addActionListener(new ActionListener()
-        {
-
+    /**
+    public customerRegistration() {
+        registerButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                /**
+            public void actionPerformed(ActionEvent e) {
+
+
                  * A few different errors here, you are constantly trying to reinitiate variables as different types
                  * Such as with String customerID, String state, and String phoneNumber
                  * It would be better to use different values for the boxes
-                 *
-                 **/
+
+
                 // You cannot use a class without first creating an instance of it
                 String customerID = CustomerDAO.initID();
 
@@ -55,17 +52,16 @@ public class customerRegistration {
                 double lastPaid = Double.parseDouble(lastPaid.getText());
                 String lastOrder = lastOrder.getText();
 
-
             }
+        });
+    }
+    **/
 
-            public void main(String[] args)
-            {
-                JFrame frame = new JFrame("customerRegistration");
-                frame.setContentPane(new customerRegistration().menu);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-            }
-        }
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("customerProfilesUI/customerRegistration.form");
+        frame.setContentPane(new customerRegistration().menu);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 }
