@@ -6,6 +6,7 @@ import profiles.itemProfiles.Item;
 
 import java.io.*;
 import java.util.Random;
+import java.util.Vector;
 
 /**
  * This class is used to implement the IProfileDAO interface
@@ -54,6 +55,7 @@ public class VendorDAO implements IProfileDAO {
                     existence = true;
                 }
             }
+            bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,17 +73,16 @@ public class VendorDAO implements IProfileDAO {
         try {
             FileWriter writer = new FileWriter("VProfiles", true);
             //BufferedWriter bufferedWriter = new BufferedWriter(writer);
-            writer.write(vendor.getId() + "|");
-            writer.write(vendor.getName() + "|");
-            writer.write(vendor.getAddress() + "|");
-            writer.write(vendor.getCity() + "|");
-            writer.write(vendor.getState() + "|");
-            writer.write(vendor.getPhoneNumber() + "|");
-            writer.write(vendor.getBalance() + "|");
-            writer.write(vendor.getLastPaidAmount() + "|");
-            writer.write(vendor.getLastOrderDate() + "|");
-            writer.write(vendor.getSeasonalDiscountsStartDate() + "|");
-            writer.write("\n");
+            writer.write(vendor.getId() + "\n"); // DataItem = 0
+            writer.write(vendor.getName() + "\n"); // DataItem = 1
+            writer.write(vendor.getAddress() + "\n"); // DataItem = 2
+            writer.write(vendor.getCity() + "\n"); // DataItem = 3
+            writer.write(vendor.getState() + "\n"); // DataItem = 4
+            writer.write(vendor.getPhoneNumber() + "\n"); // DataItem = 5
+            writer.write(vendor.getBalance() + "\n"); // DataItem = 6
+            writer.write(vendor.getLastPaidAmount() + "\n"); // DataItem = 7
+            writer.write(vendor.getLastOrderDate() + "\n"); // DataItem = 8
+            writer.write(vendor.getSeasonalDiscountsStartDate() + "\n"); // DataItem = 9
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,5 +98,128 @@ public class VendorDAO implements IProfileDAO {
     public void insertItem(Item item) {
         System.out.println("Cannot access this datatype with VendorDAO");
     }
+
+    public boolean checkId(String id) {
+        boolean existence = false;
+        try {
+            FileReader reader = new FileReader("VProfiles");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            System.out.println(bufferedReader);
+            String temp;
+            while ((temp = bufferedReader.readLine()) != null) {
+                System.out.println(bufferedReader);
+                if (temp.contains(id)) {
+                    existence = true;
+                }
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return existence;
+    }
+
+    public Vendor retrieveUsername(String username) {
+        Vendor vendor = new Vendor("","","","","","",0,
+        0,"","");
+        try {
+            FileReader reader = new FileReader("VProfiles");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String temp;
+            int dataItem = 0;
+            boolean flag = false;
+            while ((temp = bufferedReader.readLine()) != null) {
+                if (temp.contains(username)) {
+                    flag = true;
+                    vendor.setName(temp);
+                }
+                if (flag = true){
+                    switch (dataItem) {
+                        case 5 -> vendor.setPhoneNumber(temp);
+                        case 6 -> vendor.setBalance(Double.parseDouble(temp));
+                        case 7 -> vendor.setLastPaidAmount(Double.parseDouble(temp));
+                        case 8 -> vendor.setLastOrderDate(temp);
+                        case 9 -> flag = false;
+                    }
+                }
+                if (dataItem == 9)
+                    dataItem = -1;
+                dataItem = dataItem + 1;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return vendor;
+    }
+
+    public Vendor retrieveID(String input) {
+        Vendor vendor = new Vendor("","","","","","",0,
+                0,"","");
+        try {
+            FileReader reader = new FileReader("VProfiles");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String temp;
+            int dataItem = 0;
+            boolean flag = false;
+            while ((temp = bufferedReader.readLine()) != null) {
+                if (temp.contains(input)) {
+                    flag = true;
+                    vendor.setName(temp);
+                }
+                if (flag = true){
+                    switch (dataItem) {
+                        case 2 -> vendor.setName(temp);
+                        case 5 -> vendor.setPhoneNumber(temp);
+                        case 6 -> vendor.setBalance(Double.parseDouble(temp));
+                        case 7 -> vendor.setLastPaidAmount(Double.parseDouble(temp));
+                        case 8 -> vendor.setLastOrderDate(temp);
+                        case 9 -> flag = false;
+                    }
+                }
+                if (dataItem == 9)
+                    dataItem = -1;
+                dataItem = dataItem + 1;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return vendor;
+    }
+
+    public Vector<Vendor> retrieveAll() {
+        Vector<Vendor> vendors = new Vector<Vendor>();
+        try {
+            FileReader reader = new FileReader("VProfiles");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            Vendor vendor = new Vendor("","","","","","",0,
+                    0,"","");
+            String temp;
+            int dataItem = 0;
+            int index = 0;
+            while ((temp = bufferedReader.readLine()) != null) {
+                switch (dataItem) {
+                    case 1 -> vendor.setName(temp);
+                    case 5 -> vendor.setPhoneNumber(temp);
+                    case 6 -> vendor.setBalance(Double.parseDouble(temp));
+                    case 7 -> vendor.setLastPaidAmount(Double.parseDouble(temp));
+                    case 8 -> vendor.setLastOrderDate(temp);
+                }
+                if (dataItem == 9) {
+                    vendors.add(vendor);
+                    dataItem = -1;
+                    index = index + 1;
+                }
+                dataItem = dataItem + 1;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return vendors;
+    }
+
 
 }
