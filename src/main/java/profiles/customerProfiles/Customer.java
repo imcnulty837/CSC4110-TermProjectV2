@@ -2,40 +2,45 @@ package profiles.customerProfiles;
 
 import profiles.Profile;
 
+import javax.swing.*;
+
 /**
  * This class details the customer profile's characteristics
  * @author Aaliyah Murray
  */
 public class Customer extends Profile {
         private String customerID;
-        private String firstName;
-        private String lastName;
+        private String fullName;
         private String streetAddress;
         private String state;
         private String cityName;
         private String phoneNumber;
         private double balance;
         private double lastPaid;
-        private int lastOrder;
+        private String lastOrder;
 
         //parameterized constructor
-        public Customer(String cusID, String fn, String ln, String sa, String st,
-                        String cn, String pn, double bal, double lp) {
+        public Customer(String cusID, String fn, String sa, String st,
+                        String cn, String pn, double bal, double lp, String lOr) {
 
                 this.customerID = cusID;
-                this.firstName = fn;
-                this.lastName = ln;
+                this.fullName = fn;
                 this.streetAddress = sa;
                 this.state = st;
                 this.cityName = cn;
                 this.phoneNumber = pn;
                 this.balance = bal;
                 this.lastPaid = lp;
+                this.lastOrder = lOr;
 
         }
 
+        public Customer(JTextField fullName, JTextField streetAddress, JTextField cityName, String state,
+                        JTextField phone, JTextField bal, double lastPaid, String lastOrder) {
+                super();
+        }
 
-//setters & getters
+        //setters & getters
         public double getLastPaid() {
                 return lastPaid;
         }
@@ -44,11 +49,11 @@ public class Customer extends Profile {
                 this.lastPaid = lastPaid;
         }
 
-        public int getLastOrder() {
+        public String getLastOrder() {
                 return lastOrder;
         }
 
-        public void setLastOrder(int lastOrder) {
+        public void setLastOrder(String lastOrder) {
                 this.lastOrder = lastOrder;
         }
 
@@ -76,20 +81,12 @@ public class Customer extends Profile {
                 this.customerID = customerID;
         }
 
-        public String getFirstName() {
-                return firstName;
+        public String getFullName() {
+                return fullName;
         }
 
-        public void setFirstName(String firstName) {
-                this.firstName = firstName;
-        }
-
-        public String getLastName() {
-                return lastName;
-        }
-
-        public void setLastName(String lastName) {
-                this.lastName = lastName;
+        public void setFullName(String fullName) {
+                this.fullName = fullName;
         }
 
         public String getStreetAddress() {
@@ -124,7 +121,7 @@ public class Customer extends Profile {
                 lastPaid = lastPaidAmount;
         }
 
-        public int getlastOrder() {
+        public String getlastOrder() {
                 return lastOrder;
         }
 
@@ -132,5 +129,3 @@ public class Customer extends Profile {
                 lastOrder = lastOrder;
         }
 }
-
-
