@@ -23,7 +23,7 @@ public class vendorRegistration {
     private JTextField lastOrder = new JTextField("");
     private JTextField seasonalDiscount = new JTextField("mm/dd/yyyy");
     private JComboBox stateBox = new JComboBox(states);
-    private JPanel registrationMenu = new JPanel();
+    private JPanel registrationMenu = new JPanel(new GridLayout(9,2));
     private JButton registerButton = new JButton("Register");
     private JFrame f = new JFrame("Registration Menu");
     private JButton ret = new JButton("Return to Vendor Management");
@@ -118,7 +118,8 @@ public class vendorRegistration {
             }
         });
 
-        GridLayout grid = new GridLayout(18,1);
+        /**
+        GridLayout grid = new GridLayout(9,2);
         JPanel[] tempPanel = {new JPanel(),new JPanel(),new JPanel(),
                 new JPanel(),new JPanel(),new JPanel(),new JPanel(),
                 new JPanel(),new JPanel(),new JPanel(),new JPanel(),
@@ -126,7 +127,37 @@ public class vendorRegistration {
         for (int i = 0; i < 13; i++) {
             tempPanel[i].setLayout(new GridLayout(1, 2));
         }
+         **/
 
+        JPanel toppnl = new JPanel();
+        toppnl.add(new JLabel("Registration"));
+
+        registrationMenu.setPreferredSize(new Dimension(500,360));
+        registrationMenu.add(new JLabel("Company Name"));
+        registrationMenu.add(companyName);
+        registrationMenu.add(new JLabel("Address"));
+        registrationMenu.add(streetAddress);
+        registrationMenu.add(new JLabel("City"));
+        registrationMenu.add(cityName);
+        registrationMenu.add(new JLabel("State"));
+        registrationMenu.add(stateBox);
+        registrationMenu.add(new JLabel("Phone Number"));
+        registrationMenu.add(phoneNumber);
+        registrationMenu.add(new JLabel("Balance*"));
+        registrationMenu.add(bal);
+        registrationMenu.add(new JLabel("Last Paid Balance*"));
+        registrationMenu.add(lastPaid);
+        registrationMenu.add(new JLabel("Last Order Date"));
+        registrationMenu.add(lastOrder);
+        registrationMenu.add(new JLabel("Seasonal Discount Start Date"));
+        registrationMenu.add(seasonalDiscount);
+
+        JPanel bottompnl = new JPanel(new GridLayout(3,1));
+        bottompnl.add(registerButton);
+        bottompnl.add(new JLabel("* asterisks denote an unnecessary field"));
+        bottompnl.add(ret);
+
+        /**
         registrationMenu.setPreferredSize(new Dimension(500, 360));
         registrationMenu.setLayout(grid);
         tempPanel[0].add(reglbl);
@@ -152,10 +183,14 @@ public class vendorRegistration {
         tempPanel[11].add(asterisklbl);
         tempPanel[12].add(ret);
 
+
         for(int i = 0; i < 13; i++)
             registrationMenu.add(tempPanel[i]);
+         **/
 
+        f.add(toppnl, BorderLayout.PAGE_START);
         f.add(registrationMenu, BorderLayout.CENTER);
+        f.add(bottompnl, BorderLayout.PAGE_END);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.pack();
         f.setVisible(true);
