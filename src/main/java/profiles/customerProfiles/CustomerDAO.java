@@ -95,18 +95,18 @@ public class CustomerDAO implements IProfileDAO {
     public void insertCustomer(Customer customer) {
         try {
             System.out.println(customer.getCustomerID());
-            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("CProfiles.txt", true)));
-            pw.append(customer.getCustomerID() + "|");
-            pw.append(customer.getFullName() + "|");
-            pw.append(customer.getStreetAddress() + "|");
-            pw.append(customer.getCityName() + "|");
-            pw.append(customer.getState() + "|");
-            pw.append(customer.getPhoneNumber() + "|");
-            pw.append(customer.getBalance() + "|");
-            pw.append(customer.getlastPaid() + "|");
-            pw.append(customer.getlastOrder() + "|");
-            pw.append("\n");
-            pw.close();
+            FileWriter writer = new FileWriter("CProfiles", true);
+            writer.write(customer.getCustomerID() + "\n"); // dataItem = 0
+            writer.write(customer.getFullName() + "\n"); // dataItem = 1
+            writer.write(customer.getStreetAddress() + "\n"); // dataItem = 2
+            writer.write(customer.getCityName() + "\n"); // dataItem = 3
+            writer.write(customer.getState() + "\n"); // dataItem = 4
+            writer.write(customer.getPhoneNumber() + "\n"); // dataItem = 5
+            writer.write(customer.getBalance() + "\n"); // dataItem = 6
+            writer.write(customer.getlastPaid() + "\n"); // dataItem = 7
+            writer.write(customer.getlastOrder() + "\n"); // dataItem = 8
+            writer.write("\n");
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
