@@ -44,11 +44,11 @@ public class CustomerDAO implements IProfileDAO {
 
     public boolean check(String name) {
 
-        boolean exists = false;
+       /* boolean exists = false;
         try {
             File rd = new File("CProfiles");
             PrintWriter pw = new PrintWriter("CProfiles");
-            Scanner sc = new Scanner(System.in);
+            Scanner sc;
             sc = new Scanner(rd);
             System.out.println(rd);
             String temp;
@@ -64,11 +64,11 @@ public class CustomerDAO implements IProfileDAO {
             e.printStackTrace();
         }
         return exists;
-    }
+    } */
 
-
-        /*try {
-            FileReader reader = new FileReader("CProfile.txt");
+        boolean exists = false;
+        try {
+            FileReader reader = new FileReader("CProfiles.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
             System.out.println(bufferedReader);
             String temp;
@@ -84,7 +84,7 @@ public class CustomerDAO implements IProfileDAO {
 
         return exists;
 
-    } */
+    }
     /**
      * Inserts a new customer object into the place of storage
      *
@@ -94,17 +94,18 @@ public class CustomerDAO implements IProfileDAO {
     @Override
     public void insertCustomer(Customer customer) {
         try {
-            PrintWriter pw = new PrintWriter("CProfile.txt");
-            pw.write(customer.getId() + "|");
-            pw.write(customer.getName() + "|");
-            pw.write(customer.getStreetAddress() + "|");
-            pw.write(customer.getCityName() + "|");
-            pw.write(customer.getState() + "|");
-            pw.write(customer.getPhoneNumber() + "|");
-            pw.write(customer.getBalance() + "|");
-            pw.write(customer.getlastPaid() + "|");
-            pw.write(customer.getlastOrder() + "|");
-            pw.write("\n");
+            System.out.println(customer.getCustomerID());
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("CProfiles.txt", true)));
+            pw.append(customer.getCustomerID() + "|");
+            pw.append(customer.getFullName() + "|");
+            pw.append(customer.getStreetAddress() + "|");
+            pw.append(customer.getCityName() + "|");
+            pw.append(customer.getState() + "|");
+            pw.append(customer.getPhoneNumber() + "|");
+            pw.append(customer.getBalance() + "|");
+            pw.append(customer.getlastPaid() + "|");
+            pw.append(customer.getlastOrder() + "|");
+            pw.append("\n");
             pw.close();
         } catch (IOException e) {
             e.printStackTrace();

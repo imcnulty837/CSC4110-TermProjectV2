@@ -1,5 +1,7 @@
 package profiles.customerProfilesUI;
 
+import profiles.IProfileDAO;
+import profiles.customerProfiles.Customer;
 import profiles.customerProfiles.CustomerDAO;
 
 import javax.swing.*;
@@ -7,58 +9,69 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class customerRegistration {
-    private JTextField customerRegistrationTextField;
-    private JTextField customerID;
     private JTextField fullName;
     private JTextField StreetAddress;
-    private JTextField phoneNumber;
-    private JTextField balance;
-    private JTextField lastOrder;
-    private JTextField cityName;
-    private JComboBox state;
-    private JTextField lastPaid;
+    private JTextField phone;
+    private JTextField lastOrderDate;
+    private JComboBox stateName;
+    private JTextField lastPaidAmount;
     private JButton register;
     private JPanel menu;
-    private JButton registerButton;
+    private JLabel customerProfile;
+    private JTextField cityName;
+    private JTextField bal;
 
-    /**
+    private IProfileDAO customerDAO = new CustomerDAO();
+
     public customerRegistration() {
-        registerButton.addActionListener(new ActionListener() {
+        register.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-                 * A few different errors here, you are constantly trying to reinitiate variables as different types
-                 * Such as with String customerID, String state, and String phoneNumber
-                 * It would be better to use different values for the boxes
-
-
-                // You cannot use a class without first creating an instance of it
-                String customerID = CustomerDAO.initID();
-
-                // You cannot call the customerID variable as a JTextField because you reinitiated it to String
-                String fullName = customerID.getText();
-
-                // These are fine
+                String customerID = customerDAO.initID();
+                String name = fullName.getText();
                 String address = StreetAddress.getText();
                 String city = cityName.getText();
+                String state = stateName.getSelectedItem().toString();
+                String phoneNumber = phone.getText();
+                double balance = Double.parseDouble(bal.getText());
+                double lastPaid = Double.parseDouble(lastPaidAmount.getText());
+                String lastOrder = lastOrderDate.getText();
+                System.out.println("hello");
 
-                // You are reinitating both state and phoneNumber to be String datatypes, you need to use different names
-                String state = state.getSelectedItem().toString();
-                String phoneNumber = phoneNumber.getText();
+                Customer customer = new Customer(customerID, name, address, state, city, phoneNumber,
+                        balance, lastPaid, lastOrder);
 
-                // You are also reinitiating balance, lastPaid, and lastOrder
-                double balance = Double.parseDouble(balance.getText());
-                double lastPaid = Double.parseDouble(lastPaid.getText());
-                String lastOrder = lastOrder.getText();
-
+                if (!name.isEmpty()  && !address.isEmpty() && !city.isEmpty() &&
+                        !state.isEmpty() && !phoneNumber.isEmpty() && !lastOrder.isEmpty()) {
+                    if(name.length() > 20 && address.length() > 20 && city.length() > 20 )
+                        JOptionPane.showMessageDialog(menu, "Please use only 20 characters or less.");
+                    if(customerDAO.check(name))
+                        JOptionPane.showMessageDialog(menu, "Name already exists, please try again.");
+                    if (!customerDAO.check(name)) {
+                        JOptionPane.showMessageDialog(menu, "Registration Successful!");
+                        customerDAO.insertCustomer(customer);
+                    } else {
+                        JOptionPane.showMessageDialog(menu, "Registration was Unsuccessful. Username " +
+                                "already exists");
+                        fullName.setText("");
+                        StreetAddress.setText("");
+                        cityName.setText("");
+                        phone.setText("");
+                        bal.setText("");
+                        lastPaidAmount.setText("");
+                        lastOrderDate.setText("");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(menu, "Please fill out the empty fields");
+                }
             }
         });
     }
-    **/
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("customerProfilesUI/customerRegistration.form");
+        JFrame frame = new JFrame("customer registration");
         frame.setContentPane(new customerRegistration().menu);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
