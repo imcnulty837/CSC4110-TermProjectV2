@@ -26,7 +26,6 @@ public class customerRegistration {
     private JButton register = new JButton("Register");
     private JPanel menu = new JPanel();
     private JComboBox stateBox = new JComboBox(states);
-    private JLabel customerProfile = new JLabel();
     private JTextField cityName = new JTextField("");
     private JTextField bal = new JTextField("0.0");
     private JFrame frame = new JFrame("Customer Registration");
@@ -34,6 +33,8 @@ public class customerRegistration {
     private IProfileDAO customerDAO = new CustomerDAO();
 
     public customerRegistration() {
+        //fullName.setPreferredSize(new Dimension(100, 50));
+        //StreetAddress.setPreferredSize(new Dimension(100, 50));
 
         register.addActionListener(new ActionListener() {
 
@@ -82,11 +83,26 @@ public class customerRegistration {
 
         // Need to add more components to this if you plan to use it
         // Use this block to add components to the menu
+        JPanel title = new JPanel();
+        title.add(new JLabel("Registration"));
+
+        menu.setLayout(new GridLayout(8,2));
         menu.setPreferredSize(new Dimension(500, 500));
-        menu.add(customerProfile);
+        menu.add(new JLabel("Company Name"));
+        menu.add(fullName);
+        menu.add(new JLabel("Address"));
+        menu.add(StreetAddress);
+        // Add remaining labels and fields here
+        // label first, field second
+
+        // Register button
+        JPanel registerpnl = new JPanel();
+        registerpnl.add(register);
 
         // Use this block to show the menu
+        frame.add(title, BorderLayout.PAGE_START);
         frame.add(menu, BorderLayout.CENTER);
+        frame.add(registerpnl, BorderLayout.PAGE_END);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
