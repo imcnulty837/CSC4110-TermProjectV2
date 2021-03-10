@@ -1,6 +1,7 @@
 package profiles.itemRegistrationUI;
 
 import profiles.IProfileDAO;
+import profiles.Profile;
 import profiles.itemProfiles.Item;
 import profiles.itemProfiles.ItemDAO;
 import profiles.vendorManagementUI.vendorMenu;
@@ -64,7 +65,7 @@ public class itemRegistration {
                 String unit = unitOfMeasurement.getText();
                 String expiration = expirationDate.getText();
 
-                Item item = new Item(id, name, vendor, selling, category, expiration,
+                Item<Profile> item = new Item<Profile>(id, name, vendor, selling, category, expiration,
                         purchase, unit, quantityText);
                 if (name.length() > 20 ||  vendor.length() > 20) {
                     if (!name.isEmpty()  && !vendor.isEmpty() && !category.isEmpty()
@@ -95,7 +96,7 @@ public class itemRegistration {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.dispose();
-                new vendorMenu();
+                new itemMenu();
             }
         });
 

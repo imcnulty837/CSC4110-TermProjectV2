@@ -1,11 +1,9 @@
 package profiles.customerProfiles;
 
 import profiles.IProfileDAO;
+import profiles.Profile;
 import profiles.itemProfiles.Item;
 import profiles.vendorProfiles.Vendor;
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 import java.io.*;
 import java.util.Random;
@@ -118,7 +116,7 @@ public class CustomerDAO implements IProfileDAO {
     }
 
     @Override
-    public void insertItem(Item item) {
+    public void insertItem(Item<Profile> item) {
         System.out.println("Cannot access this datatype with CustomerDAO");
     }
 

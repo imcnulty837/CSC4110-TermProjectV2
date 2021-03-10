@@ -2,7 +2,7 @@ package profiles.itemProfiles;
 
 import profiles.Profile;
 
-public class Item extends Profile {
+public class Item<I extends Profile> extends Profile {
     private String vendorID;
     private double sellingPrice;
     private String itemCategory;
@@ -18,6 +18,17 @@ public class Item extends Profile {
         super.setName(name);
         this.vendorID = vendorID;
         this.sellingPrice = sellingPrice;
+        this.itemCategory = itemCategory;
+        this.expirationDate = expirationDate;
+        this.purchasePrice = purchasePrice;
+        this.unit = unit;
+        this.quantity = quantity;
+    }
+
+    public Item(String id, String name, String vendorID, String s, String itemCategory, String expirationDate, int purchasePrice, int i, String s1, String s2) {
+        super.setName(name);
+        super.setId(id);
+        this.vendorID = vendorID;
         this.itemCategory = itemCategory;
         this.expirationDate = expirationDate;
         this.purchasePrice = purchasePrice;
@@ -80,5 +91,6 @@ public class Item extends Profile {
     public void setVendorID(String vendorID) {
         this.vendorID = vendorID;
     }
+
 }
 
