@@ -1,6 +1,7 @@
 package profiles.vendorProfiles;
 
 import profiles.IProfileDAO;
+import profiles.Profile;
 import profiles.customerProfiles.Customer;
 import profiles.itemProfiles.Item;
 
@@ -95,7 +96,7 @@ public class VendorDAO implements IProfileDAO {
     }
 
     @Override
-    public void insertItem(Item item) {
+    public void insertItem(Item<Profile> item) {
         System.out.println("Cannot access this datatype with VendorDAO");
     }
 

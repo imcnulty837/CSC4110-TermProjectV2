@@ -1,6 +1,7 @@
 package profiles.customerProfiles;
 
 import profiles.IProfileDAO;
+import profiles.Profile;
 import profiles.itemProfiles.Item;
 import profiles.vendorProfiles.Vendor;
 
@@ -95,7 +96,7 @@ public class CustomerDAO implements IProfileDAO {
     }
 
     @Override
-    public void insertItem(Item item) {
+    public void insertItem(Item<Profile> item) {
         System.out.println("Cannot access this datatype with CustomerDAO");
     }
 
