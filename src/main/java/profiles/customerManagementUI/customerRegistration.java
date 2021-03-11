@@ -33,7 +33,7 @@ public class customerRegistration {
     private IProfileDAO customerDAO = new CustomerDAO();
 
     public customerRegistration() {
-        //fullName.setPreferredSize(new Dimension(100, 50));
+        fullName.setPreferredSize(new Dimension(5, 5));
         //StreetAddress.setPreferredSize(new Dimension(100, 50));
 
         register.addActionListener(new ActionListener() {
@@ -92,9 +92,18 @@ public class customerRegistration {
         menu.add(fullName);
         menu.add(new JLabel("Address"));
         menu.add(StreetAddress);
-        // Add remaining labels and fields here
-        // label first, field second
-
+        menu.add(new JLabel("phone"));
+        menu.add(phone);
+        menu.add(new JLabel("City Name"));
+        menu.add(cityName);
+        menu.add(new JLabel("State"));
+        menu.add(stateBox);
+        menu.add(new JLabel("bal"));
+        menu.add(bal);
+        menu.add(new JLabel("Last Order Date"));
+        menu.add(lastOrderDate);
+        menu.add(new JLabel("Last Paid Amount"));
+        menu.add(lastPaidAmount);
         // Register button
         JPanel registerpnl = new JPanel();
         registerpnl.add(register);

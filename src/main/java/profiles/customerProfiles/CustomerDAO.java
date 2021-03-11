@@ -3,12 +3,11 @@ package profiles.customerProfiles;
 import profiles.IProfileDAO;
 import profiles.itemProfiles.Item;
 import profiles.vendorProfiles.Vendor;
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
 import java.io.*;
 import java.util.Random;
+import java.util.Vector;
+
 /**
  * This class is used to implement the IProfileDAO interface
  *
@@ -43,28 +42,6 @@ public class CustomerDAO implements IProfileDAO {
      */
 
     public boolean check(String name) {
-
-       /* boolean exists = false;
-        try {
-            File rd = new File("CProfiles");
-            PrintWriter pw = new PrintWriter("CProfiles");
-            Scanner sc;
-            sc = new Scanner(rd);
-            System.out.println(rd);
-            String temp;
-            while ((temp = sc.nextLine()) != null) {
-                System.out.println(rd);
-                if (temp.contains(name)) {
-                    exists = true;
-                }
-                sc.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return exists;
-    } */
 
         boolean exists = false;
         try {
@@ -121,5 +98,108 @@ public class CustomerDAO implements IProfileDAO {
     public void insertItem(Item item) {
         System.out.println("Cannot access this datatype with CustomerDAO");
     }
+
+    public Customer retrieveUsername(String username) {
+        Customer customer = new Customer("","","","","","",0,
+                0,"");
+        try {
+            FileReader reader = new FileReader("CProfiles");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String temp;
+            int dataItem = 0;
+            boolean flag = false;
+            while ((temp = bufferedReader.readLine()) != null) {
+                if (temp.contains(username)) {
+                    flag = true;
+                    customer.setFullName(temp);
+                }
+                if (flag = true){
+                    switch (dataItem) {
+                        case 5 -> customer.setPhoneNumber(temp);
+                        case 6 -> customer.setBalance(Double.parseDouble(temp));
+                        case 7 -> customer.setlastPaid(Double.parseDouble(temp));
+                        case 8 -> customer.setLastOrder(temp);
+                        case 9 -> flag = false;
+                    }
+                }
+                if (dataItem == 9)
+                    dataItem = -1;
+                dataItem = dataItem + 1;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
+    public Customer retrieveID(String input) {
+        Customer customer = new Customer("","","","","","",0,
+                0,"");
+        try {
+            FileReader reader = new FileReader("VProfiles");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String temp;
+            int dataItem = 0;
+            boolean flag = false;
+            while ((temp = bufferedReader.readLine()) != null) {
+                if (temp.contains(input)) {
+                    flag = true;
+                    customer.setFullName(temp);
+                }
+                if (flag = true){
+                    switch (dataItem) {
+                        case 2 -> customer.setFullName(temp);
+                        case 5 -> customer.setPhoneNumber(temp);
+                        case 6 -> customer.setBalance(Double.parseDouble(temp));
+                        case 7 -> customer.setlastPaid(Double.parseDouble(temp));
+                        case 8 -> customer.setLastOrder(temp);
+                        case 9 -> flag = false;
+                    }
+                }
+                if (dataItem == 9)
+                    dataItem = -1;
+                dataItem = dataItem + 1;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return customer;
+    }
+
+    public Vector<Customer> retrieveAll() {
+        Vector<Customer> customers = new Vector<>();
+        Customer customer = null;
+        try {
+            FileReader reader = new FileReader("VProfiles");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            customer = new Customer("", "", "", "", "", "", 0,
+                    0, "");
+            String temp;
+            int dataItem = 0;
+            int index = 0;
+            while ((temp = bufferedReader.readLine()) != null) {
+                switch (dataItem) {
+                    case 1 -> customer.setFullName(temp);
+                    case 5 -> customer.setPhoneNumber(temp);
+                    case 6 -> customer.setBalance(Double.parseDouble(temp));
+                    case 7 -> customer.setlastPaid(Double.parseDouble(temp));
+                    case 8 -> customer.setlastOrder(temp);
+                }
+                if (dataItem == 9) {
+                    customers.add(customer);
+                    dataItem = -1;
+                    index = index + 1;
+                }
+                dataItem = dataItem + 1;
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
+
 
 }
